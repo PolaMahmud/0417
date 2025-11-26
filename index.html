@@ -2,139 +2,262 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="icon.png">
-  <title>ICT 0417</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <link rel="icon" type="image/png" href="icon.png">
+  <title>ICT 0417 Resources</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --primary-color: #0073e6;
+      --hover-color: #005bb5;
+      --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      --card-bg: #ffffff;
+      --text-main: #333;
+      --text-light: #666;
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.05);
+      --shadow-hover: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-gradient);
       margin: 0;
       padding: 0;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      color: var(--text-main);
     }
+
     .container {
-      background: white;
-      padding: 2rem 3rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      background: var(--card-bg);
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: var(--shadow-soft);
       text-align: center;
-      width: 70%;    /* relative to screen */
-      max-width: 2000px; /* upper limit */
+      width: 85%;
+      max-width: 1100px;
+      margin: 2rem 0; /* Adds space on top/bottom for scrolling on mobile */
     }
+
     h1 {
       margin-top: 0;
-      color: #333;
-    }
-    .folders {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 2rem;
-    }
-    .folder {
-      flex: 1;
-      margin: 0 1rem;
-    }
-    .folder h2 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      margin: 0.5rem 0;
-    }
-    a {
-      text-decoration: none;
-      color: #0073e6;
-      font-weight: bold;
-    }
-    a:hover {
-      color: #005bb5;
-    }
-    .folder-icon {
-      font-size: 2rem;
-      display: block;
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 2.5rem;
       margin-bottom: 0.5rem;
     }
 
-    /* --- New TikTok Footer Styles --- */
-    .social-footer {
-      margin-top: 3rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid #eee;
+    p.subtitle {
+      color: var(--text-light);
+      margin-bottom: 3rem;
+      font-size: 1.1rem;
     }
-    .slogan {
-      color: #666;
-      font-style: italic;
+
+    /* --- The Grid Layout --- */
+    .folders {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 Equal columns */
+      gap: 2rem;
+      margin-top: 2rem;
+      text-align: left; /* Aligns list items nicely */
+    }
+
+    .folder {
+      background: #fafafa;
+      padding: 1.5rem;
+      border-radius: 15px;
+      border: 1px solid #eee;
+      transition: transform 0.2s ease;
+    }
+
+    .folder:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+      border-color: #e0e0e0;
+    }
+
+    .folder-header {
+      display: flex;
+      align-items: center;
       margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #eee;
+    }
+
+    .folder-icon {
+      font-size: 1.8rem;
+      margin-right: 0.8rem;
+    }
+
+    .folder h2 {
+      font-size: 1.3rem;
+      margin: 0;
+      color: #444;
+    }
+
+    /* --- Link Styling --- */
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Making links look like clickable buttons/rows */
+    .resource-link {
+      display: block;
+      padding: 10px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 500;
       font-size: 0.95rem;
+      background-color: white;
+      border: 1px solid transparent;
+      transition: all 0.2s;
     }
+
+    .resource-link:hover {
+      background-color: #eef4ff; /* Light blue background */
+      color: var(--primary-color);
+      padding-left: 18px; /* Slide effect */
+      border-color: #d0e1fd;
+    }
+
+    /* --- TikTok Footer Styles --- */
+    .social-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid #eee;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .slogan {
+      color: #888;
+      font-style: italic;
+      font-weight: 400;
+      margin: 0;
+    }
+
     .tiktok-btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       background-color: #000;
-      color: white !important; /* Force white text */
-      padding: 10px 25px;
+      color: white !important;
+      padding: 12px 28px;
       border-radius: 50px;
-      font-weight: normal;
-      transition: all 0.2s ease;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy effect */
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
+
     .tiktok-btn:hover {
       background-color: #333;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    /* --- Mobile Responsiveness --- */
+    @media (max-width: 768px) {
+      .container {
+        width: 90%;
+        padding: 1.5rem;
+        margin: 1rem auto;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+
+      .folders {
+        grid-template-columns: 1fr; /* Stack into 1 column */
+        gap: 1.5rem;
+      }
+
+      .folder {
+        padding: 1.2rem;
+      }
+
+      .resource-link {
+        padding: 12px 15px; /* Larger tap targets for fingers */
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
+
   <div class="container">
     <h1>Welcome</h1>
-    <p>You can find your ICT resources here:</p>
+    <p class="subtitle">ICT 0417 Learning Hub</p>
 
     <div class="folders">
+      
       <div class="folder">
-        <span class="folder-icon">📚</span>
-        <h2>Slides</h2>
+        <div class="folder-header">
+          <span class="folder-icon">📚</span>
+          <h2>Slides</h2>
+        </div>
         <ul>
-          <li><a href="Ch1.pdf" target="_blank">Chapter 1</a></li>
-          <li><a href="Ch2.pdf" target="_blank">Chapter 2</a></li>
-          <li><a href="Ch3.pdf" target="_blank">Chapter 3</a></li>
-          <li><a href="Ch4.pdf" target="_blank">Chapter 4</a></li>
-          <li><a href="Ch5.pdf" target="_blank">Chapter 5</a></li>
+          <li><a href="Ch1.pdf" target="_blank" class="resource-link">Chapter 1</a></li>
+          <li><a href="Ch2.pdf" target="_blank" class="resource-link">Chapter 2</a></li>
+          <li><a href="Ch3.pdf" target="_blank" class="resource-link">Chapter 3</a></li>
+          <li><a href="Ch4.pdf" target="_blank" class="resource-link">Chapter 4</a></li>
+          <li><a href="Ch5.pdf" target="_blank" class="resource-link">Chapter 5</a></li>
         </ul>
       </div>
+
       <div class="folder">
-        <span class="folder-icon">📘</span>
-        <h2>Material</h2>
+        <div class="folder-header">
+          <span class="folder-icon">📘</span>
+          <h2>Material</h2>
+        </div>
         <ul>
-          <li><a href="BOK.pdf" target="_blank">Book</a></li>
-          <li><a href="0417S.pdf" target="_blank">Syllabus</a></li>
+          <li><a href="BOK.pdf" target="_blank" class="resource-link">Textbook</a></li>
+          <li><a href="0417S.pdf" target="_blank" class="resource-link">Syllabus</a></li>
         </ul>
       </div>
-       <div class="folder">
-        <span class="folder-icon">❓</span>
-        <h2>Questions</h2>
+
+      <div class="folder">
+        <div class="folder-header">
+          <span class="folder-icon">❓</span>
+          <h2>Questions</h2>
+        </div>
         <ul>
-          <li><a href="QPC1.pdf" target="_blank">Chapter 1</a></li>
-          <li><a href="QPC2.pdf" target="_blank">Chapter 2</a></li>
-          <li><a href="QPC3.pdf" target="_blank">Chapter 3</a></li>
-          <li><a href="QPC4.pdf" target="_blank">Chapter 4</a></li>
-          <li><a href="QPC5.pdf" target="_blank">Chapter 5</a></li>
+          <li><a href="QPC1.pdf" target="_blank" class="resource-link">Chapter 1</a></li>
+          <li><a href="QPC2.pdf" target="_blank" class="resource-link">Chapter 2</a></li>
+          <li><a href="QPC3.pdf" target="_blank" class="resource-link">Chapter 3</a></li>
+          <li><a href="QPC4.pdf" target="_blank" class="resource-link">Chapter 4</a></li>
+          <li><a href="QPC5.pdf" target="_blank" class="resource-link">Chapter 5</a></li>
         </ul>
       </div>
+
     </div>
 
     <div class="social-footer">
       <p class="slogan">Learn fast. Scroll smart.</p>
       <a href="https://www.tiktok.com/@projectdoomscroll" target="_blank" class="tiktok-btn">
-        ♪ Find us on TikTok ♪
+        <span>Project Doomscroll</span>
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3V0Z"/>
+        </svg>
       </a>
     </div>
 
   </div>
+
 </body>
 </html>
