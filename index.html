@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <link rel="icon" type="image/png" href="icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="icon.png">
   <title>ICT 0417 Resources</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,17 +11,54 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* --- 1. CSS Variables (The Color Palette) --- */
     :root {
-      --primary-color: #0073e6;
-      --hover-color: #005bb5;
+      /* LIGHT THEME (Default) */
       --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
       --card-bg: #ffffff;
       --text-main: #333;
       --text-light: #666;
+      --primary-color: #0073e6;
+      
+      --folder-bg: #fafafa;
+      --folder-border: #eee;
+      --folder-hover-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      
+      --link-bg: #ffffff;
+      --link-hover-bg: #eef4ff;
+      --link-border: transparent;
+      
+      --tiktok-bg: #000;
+      --tiktok-text: #fff;
       --shadow-soft: 0 10px 30px rgba(0,0,0,0.05);
-      --shadow-hover: 0 10px 20px rgba(0,0,0,0.1);
+      --icon-sun: none;
+      --icon-moon: inline-block;
     }
 
+    /* DARK THEME OVERRIDES */
+    [data-theme="dark"] {
+      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      --card-bg: #1e293b;
+      --text-main: #f1f5f9;
+      --text-light: #94a3b8;
+      --primary-color: #60a5fa; /* Lighter blue for dark mode */
+      
+      --folder-bg: #334155;
+      --folder-border: #475569;
+      --folder-hover-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      
+      --link-bg: #1e293b; /* Matches card bg */
+      --link-hover-bg: #334155;
+      --link-border: #475569;
+      
+      --tiktok-bg: #f1f5f9; /* White button in dark mode */
+      --tiktok-text: #000;
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.3);
+      --icon-sun: inline-block;
+      --icon-moon: none;
+    }
+
+    /* --- 2. Global Resets --- */
     body {
       font-family: 'Poppins', sans-serif;
       background: var(--bg-gradient);
@@ -31,8 +69,10 @@
       justify-content: center;
       align-items: center;
       color: var(--text-main);
+      transition: background 0.3s ease;
     }
 
+    /* --- 3. Main Container --- */
     .container {
       background: var(--card-bg);
       padding: 3rem;
@@ -41,9 +81,44 @@
       text-align: center;
       width: 85%;
       max-width: 1100px;
-      margin: 2rem 0; /* Adds space on top/bottom for scrolling on mobile */
+      margin: 2rem 0;
+      position: relative; /* Needed for positioning the toggle switch */
+      transition: background 0.3s ease, box-shadow 0.3s ease;
     }
 
+    /* --- 4. Theme Toggle Button --- */
+    .theme-switch-wrapper {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .theme-btn {
+      background: transparent;
+      border: 2px solid var(--folder-border);
+      color: var(--text-main);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .theme-btn:hover {
+      background: var(--folder-bg);
+      transform: rotate(15deg);
+    }
+
+    /* Icons inside button */
+    .sun-icon { display: var(--icon-sun); }
+    .moon-icon { display: var(--icon-moon); }
+
+    /* --- 5. Content Typography --- */
     h1 {
       margin-top: 0;
       color: var(--text-main);
@@ -58,27 +133,26 @@
       font-size: 1.1rem;
     }
 
-    /* --- The Grid Layout --- */
+    /* --- 6. Grid System --- */
     .folders {
       display: grid;
-      grid-template-columns: repeat(3, 1fr); /* 3 Equal columns */
+      grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
       margin-top: 2rem;
-      text-align: left; /* Aligns list items nicely */
+      text-align: left;
     }
 
     .folder {
-      background: #fafafa;
+      background: var(--folder-bg);
       padding: 1.5rem;
       border-radius: 15px;
-      border: 1px solid #eee;
-      transition: transform 0.2s ease;
+      border: 1px solid var(--folder-border);
+      transition: transform 0.2s ease, background 0.3s ease;
     }
 
     .folder:hover {
       transform: translateY(-5px);
-      box-shadow: var(--shadow-hover);
-      border-color: #e0e0e0;
+      box-shadow: var(--folder-hover-shadow);
     }
 
     .folder-header {
@@ -86,7 +160,7 @@
       align-items: center;
       margin-bottom: 1rem;
       padding-bottom: 0.5rem;
-      border-bottom: 2px solid #eee;
+      border-bottom: 2px solid var(--folder-border);
     }
 
     .folder-icon {
@@ -97,21 +171,13 @@
     .folder h2 {
       font-size: 1.3rem;
       margin: 0;
-      color: #444;
+      color: var(--text-main);
     }
 
-    /* --- Link Styling --- */
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+    /* --- 7. Links/Buttons --- */
+    ul { list-style: none; padding: 0; margin: 0; }
+    li { margin-bottom: 0.5rem; }
 
-    li {
-      margin-bottom: 0.5rem;
-    }
-
-    /* Making links look like clickable buttons/rows */
     .resource-link {
       display: block;
       padding: 10px 12px;
@@ -120,23 +186,22 @@
       color: var(--text-main);
       font-weight: 500;
       font-size: 0.95rem;
-      background-color: white;
-      border: 1px solid transparent;
+      background-color: var(--link-bg);
+      border: 1px solid var(--link-border);
       transition: all 0.2s;
     }
 
     .resource-link:hover {
-      background-color: #eef4ff; /* Light blue background */
+      background-color: var(--link-hover-bg);
       color: var(--primary-color);
-      padding-left: 18px; /* Slide effect */
-      border-color: #d0e1fd;
+      padding-left: 18px;
     }
 
-    /* --- TikTok Footer Styles --- */
+    /* --- 8. TikTok Footer --- */
     .social-footer {
       margin-top: 4rem;
       padding-top: 2rem;
-      border-top: 1px solid #eee;
+      border-top: 1px solid var(--folder-border);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -144,7 +209,7 @@
     }
 
     .slogan {
-      color: #888;
+      color: var(--text-light);
       font-style: italic;
       font-weight: 400;
       margin: 0;
@@ -154,23 +219,22 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background-color: #000;
-      color: white !important;
+      background-color: var(--tiktok-bg);
+      color: var(--tiktok-text) !important;
       padding: 12px 28px;
       border-radius: 50px;
       font-weight: 500;
       text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy effect */
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
     .tiktok-btn:hover {
-      background-color: #333;
       transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      opacity: 0.9;
     }
 
-    /* --- Mobile Responsiveness --- */
+    /* --- 9. Mobile Responsiveness --- */
     @media (max-width: 768px) {
       .container {
         width: 90%;
@@ -178,22 +242,24 @@
         margin: 1rem auto;
       }
       
-      h1 {
-        font-size: 2rem;
+      /* Move theme toggle to align better on mobile */
+      .theme-switch-wrapper {
+        position: relative;
+        top: 0;
+        right: 0;
+        justify-content: flex-end;
+        margin-bottom: 1rem;
       }
 
+      h1 { font-size: 2rem; }
+      
       .folders {
-        grid-template-columns: 1fr; /* Stack into 1 column */
+        grid-template-columns: 1fr;
         gap: 1.5rem;
       }
-
-      .folder {
-        padding: 1.2rem;
-      }
-
+      
       .resource-link {
-        padding: 12px 15px; /* Larger tap targets for fingers */
-        font-size: 1rem;
+        padding: 12px 15px;
       }
     }
   </style>
@@ -201,11 +267,18 @@
 <body>
 
   <div class="container">
+    
+    <div class="theme-switch-wrapper">
+      <button class="theme-btn" id="theme-toggle" aria-label="Toggle Dark Mode">
+        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+    </div>
+
     <h1>Welcome</h1>
     <p class="subtitle">ICT 0417 Learning Hub</p>
 
     <div class="folders">
-      
       <div class="folder">
         <div class="folder-header">
           <span class="folder-icon">📚</span>
@@ -244,7 +317,6 @@
           <li><a href="QPC5.pdf" target="_blank" class="resource-link">Chapter 5</a></li>
         </ul>
       </div>
-
     </div>
 
     <div class="social-footer">
@@ -258,6 +330,37 @@
     </div>
 
   </div>
+
+  <script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+
+    // 1. Check if user previously selected a theme
+    const savedTheme = localStorage.getItem('theme');
+    
+    // 2. Check system preference
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    // Apply the saved theme, or the system preference if no save exists
+    if (savedTheme) {
+      htmlElement.setAttribute('data-theme', savedTheme);
+    } else if (systemPrefersDark) {
+      htmlElement.setAttribute('data-theme', 'dark');
+    }
+
+    // Toggle Logic
+    toggleBtn.addEventListener('click', () => {
+      const currentTheme = htmlElement.getAttribute('data-theme');
+      
+      if (currentTheme === 'dark') {
+        htmlElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        htmlElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  </script>
 
 </body>
 </html>
