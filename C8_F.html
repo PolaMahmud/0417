@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spreadsheet Functions Reference</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        
+        const SpreadsheetFunctions = () => {
+          const handlePrint = () => {
+            window.print();
+          };
+          
+          const categories = [
+            {
+              name: "Mathematical and Statistical Functions",
+              functions: [
+                {
+                  name: "SUM",
+                  purpose: "Adds numbers together",
+                  syntax: "=SUM(range) or =SUM(value1, value2, ...)",
+                  args: ["Range or values (mandatory) - cell ranges, individual cells, or numbers to add"]
+                },
+                {
+                  name: "AVERAGE",
+                  purpose: "Calculates the mean (average) of numbers",
+                  syntax: "=AVERAGE(range) or =AVERAGE(value1, value2, ...)",
+                  args: ["Range or values (mandatory) - cell ranges or numbers to average"]
+                },
+                {
+                  name: "MAX",
+                  purpose: "Returns the largest (maximum) value from a list",
+                  syntax: "=MAX(range) or =MAX(value1, value2, ...)",
+                  args: ["Range or values (mandatory) - cell ranges or numbers"]
+                },
+                {
+                  name: "MAXA",
+                  purpose: "Returns the largest value including text and logical values",
+                  syntax: "=MAXA(range)",
+                  args: ["Range (mandatory) - cell range that may contain numbers, text, and logical values"]
+                },
+                {
+                  name: "MIN",
+                  purpose: "Returns the smallest (minimum) value from a list",
+                  syntax: "=MIN(range) or =MIN(value1, value2, ...)",
+                  args: ["Range or values (mandatory) - cell ranges or numbers"]
+                },
+                {
+                  name: "MEDIAN",
+                  purpose: "Returns the middle value when data is in ascending order",
+                  syntax: "=MEDIAN(range)",
+                  args: ["Range (mandatory) - cell range containing numeric values"]
+                },
+                {
+                  name: "MODE",
+                  purpose: "Returns the most frequently occurring value",
+                  syntax: "=MODE(range)",
+                  args: ["Range (mandatory) - cell range containing numeric values"]
+                },
+                {
+                  name: "PRODUCT",
+                  purpose: "Multiplies numbers together",
+                  syntax: "=PRODUCT(range)",
+                  args: ["Range (mandatory) - numbers to multiply"]
+                },
+                {
+                  name: "PI",
+                  purpose: "Returns the value of Pi (π)",
+                  syntax: "=PI()",
+                  args: ["None - no arguments required"]
+                },
+                {
+                  name: "ABS",
+                  purpose: "Returns the absolute value (removes negative sign)",
+                  syntax: "=ABS(number)",
+                  args: ["Number (mandatory) - numeric value"]
+                }
+              ]
+            },
+            {
+              name: "Rounding Functions",
+              functions: [
+                {
+                  name: "INT",
+                  purpose: "Returns the whole number part (truncates decimals)",
+                  syntax: "=INT(number)",
+                  args: ["Number (mandatory) - numeric value to truncate"]
+                },
+                {
+                  name: "ROUND",
+                  purpose: "Rounds a number to a specified number of decimal places",
+                  syntax: "=ROUND(number, num_digits)",
+                  args: [
+                    "Number (mandatory) - value to round",
+                    "Num_digits (mandatory) - number of decimal places (positive for decimals, negative for tens/hundreds, 0 for whole numbers)"
+                  ]
+                },
+                {
+                  name: "ROUNDUP",
+                  purpose: "Always rounds a number up",
+                  syntax: "=ROUNDUP(number, num_digits)",
+                  args: [
+                    "Number (mandatory) - value to round up",
+                    "Num_digits (mandatory) - number of decimal places"
+                  ]
+                },
+                {
+                  name: "ROUNDDOWN",
+                  purpose: "Always rounds a number down (truncates)",
+                  syntax: "=ROUNDDOWN(number, num_digits)",
+                  args: [
+                    "Number (mandatory) - value to round down",
+                    "Num_digits (mandatory) - number of decimal places"
+                  ]
+                }
+              ]
+            },
+            {
+              name: "Counting Functions",
+              functions: [
+                {
+                  name: "COUNT",
+                  purpose: "Counts cells containing numeric data",
+                  syntax: "=COUNT(range)",
+                  args: ["Range (mandatory) - cell range to count numeric values"]
+                },
+                {
+                  name: "COUNTA",
+                  purpose: "Counts cells containing any data (numbers or text)",
+                  syntax: "=COUNTA(range)",
+                  args: ["Range (mandatory) - cell range to count non-empty cells"]
+                },
+                {
+                  name: "COUNTBLANK",
+                  purpose: "Counts blank/empty cells",
+                  syntax: "=COUNTBLANK(range)",
+                  args: ["Range (mandatory) - cell range to count blank cells"]
+                },
+                {
+                  name: "COUNTIF",
+                  purpose: "Counts cells that meet a single condition",
+                  syntax: "=COUNTIF(range, criteria)",
+                  args: [
+                    "Range (mandatory) - cell range to evaluate",
+                    "Criteria (mandatory) - condition to test (text in quotes, numbers, or cell references)"
+                  ]
+                },
+                {
+                  name: "COUNTIFS",
+                  purpose: "Counts cells that meet multiple conditions",
+                  syntax: "=COUNTIFS(range1, criteria1, range2, criteria2, ...)",
+                  args: [
+                    "Range1 (mandatory) - first range to evaluate",
+                    "Criteria1 (mandatory) - first condition",
+                    "Range2, Criteria2, etc. (optional) - additional range/criteria pairs"
+                  ]
+                }
+              ]
+            },
+            {
+              name: "Conditional Sum and Average Functions",
+              functions: [
+                {
+                  name: "SUMIF",
+                  purpose: "Sums cells that meet a single condition",
+                  syntax: "=SUMIF(range, criteria, [sum_range])",
+                  args: [
+                    "Range (mandatory) - range to evaluate against criteria",
+                    "Criteria (mandatory) - condition to test",
+                    "Sum_range (optional) - range to sum; if omitted, sums the range argument"
+                  ]
+                },
+                {
+                  name: "SUMIFS",
+                  purpose: "Sums cells that meet multiple conditions",
+                  syntax: "=SUMIFS(sum_range, range1, criteria1, range2, criteria2, ...)",
+                  args: [
+                    "Sum_range (mandatory) - range to sum",
+                    "Range1 (mandatory) - first range to evaluate",
+                    "Criteria1 (mandatory) - first condition",
+                    "Range2, Criteria2, etc. (mandatory for multiple conditions) - additional range/criteria pairs"
+                  ]
+                },
+                {
+                  name: "AVERAGEIF",
+                  purpose: "Averages cells that meet a single condition",
+                  syntax: "=AVERAGEIF(range, criteria, [average_range])",
+                  args: [
+                    "Range (mandatory) - range to evaluate",
+                    "Criteria (mandatory) - condition to test",
+                    "Average_range (optional) - range to average; if omitted, averages the range argument"
+                  ]
+                },
+                {
+                  name: "AVERAGEIFS",
+                  purpose: "Averages cells that meet multiple conditions",
+                  syntax: "=AVERAGEIFS(average_range, range1, criteria1, range2, criteria2, ...)",
+                  args: [
+                    "Average_range (mandatory) - range to average",
+                    "Range1 (mandatory) - first range to evaluate",
+                    "Criteria1 (mandatory) - first condition",
+                    "Range2, Criteria2, etc. (mandatory for multiple conditions) - additional range/criteria pairs"
+                  ]
+                },
+                {
+                  name: "MAXIFS",
+                  purpose: "Returns maximum value for cells that meet multiple conditions",
+                  syntax: "=MAXIFS(max_range, range1, criteria1, range2, criteria2, ...)",
+                  args: [
+                    "Max_range (mandatory) - range to find maximum from",
+                    "Range1 (mandatory) - first range to evaluate",
+                    "Criteria1 (mandatory) - first condition",
+                    "Range2, Criteria2, etc. (mandatory for multiple conditions) - additional range/criteria pairs"
+                  ]
+                }
+              ]
+            },
+            {
+              name: "Logical and Conditional Functions",
+              functions: [
+                {
+                  name: "IF",
+                  purpose: "Tests a condition and returns different values based on result",
+                  syntax: "=IF(logical_test, value_if_true, value_if_false)",
+                  args: [
+                    "Logical_test (mandatory) - condition to evaluate (returns TRUE or FALSE)",
+                    "Value_if_true (mandatory) - result if condition is TRUE",
+                    "Value_if_false (mandatory) - result if condition is FALSE"
+                  ]
+                },
+                {
+                  name: "IFS",
+                  purpose: "Tests multiple conditions and returns corresponding values",
+                  syntax: "=IFS(logical_test1, value1, logical_test2, value2, ...)",
+                  args: [
+                    "Logical_test1 (mandatory) - first condition",
+                    "Value1 (mandatory) - result if first condition is TRUE",
+                    "Logical_test2, Value2, etc. (optional) - additional condition/value pairs"
+                  ]
+                },
+                {
+                  name: "AND",
+                  purpose: "Returns TRUE only if all conditions are TRUE",
+                  syntax: "=AND(logical1, logical2, ...)",
+                  args: ["Logical1, Logical2, etc. (mandatory) - conditions to test"]
+                },
+                {
+                  name: "OR",
+                  purpose: "Returns TRUE if any condition is TRUE",
+                  syntax: "=OR(logical1, logical2, ...)",
+                  args: ["Logical1, Logical2, etc. (mandatory) - conditions to test"]
+                },
+                {
+                  name: "NOT",
+                  purpose: "Reverses the logic of a condition",
+                  syntax: "=NOT(logical)",
+                  args: ["Logical (mandatory) - condition to reverse"]
+                }
+              ]
+            },
+            {
+              name: "Error Handling Functions",
+              functions: [
+                {
+                  name: "ISERROR",
+                  purpose: "Tests if a value is an error",
+                  syntax: "=ISERROR(value)",
+                  args: ["Value (mandatory) - value or formula to test"]
+                },
+                {
+                  name: "IFERROR",
+                  purpose: "Returns a specified value if formula evaluates to an error",
+                  syntax: "=IFERROR(value, value_if_error)",
+                  args: [
+                    "Value (mandatory) - formula or value to check",
+                    "Value_if_error (mandatory) - value to return if an error occurs"
+                  ]
+                }
+              ]
+            },
+            {
+              name: "Lookup and Reference Functions",
+              functions: [
+                {
+                  name: "VLOOKUP",
+                  purpose: "Vertical lookup - searches first column and returns value from specified column",
+                  syntax: "=VLOOKUP(lookup_value, table_array, col_index_num, [range_lookup])",
+                  args: [
+                    "Lookup_value (mandatory) - value to search for",
+                    "Table_array (mandatory) - range containing data",
+                    "Col_index_num (mandatory) - column number to return value from",
+                    "Range_lookup (optional) - FALSE/0 for exact match, TRUE/1 for approximate match (default is TRUE)"
+                  ]
+                },
+                {
+                  name: "HLOOKUP",
+                  purpose: "Horizontal lookup - searches first row and returns value from specified row",
+                  syntax: "=HLOOKUP(lookup_value, table_array, row_index_num, [range_lookup])",
+                  args: [
+                    "Lookup_value (mandatory) - value to search for",
+                    "Table_array (mandatory) - range containing data",
+                    "Row_index_num (mandatory) - row number to return value from",
+                    "Range_lookup (optional) - FALSE/0 for exact match, TRUE/1 for approximate match"
+                  ]
+                },
+                {
+                  name: "XLOOKUP",
+                  purpose: "Advanced lookup - searches in any direction (requires latest Excel)",
+                  syntax: "=XLOOKUP(lookup_value, lookup_array, return_array, [if_not_found], [match_mode], [search_mode])",
+                  args: [
+                    "Lookup_value (mandatory) - value to search for",
+                    "Lookup_array (mandatory) - range to search in",
+                    "Return_array (mandatory) - range to return values from",
+                    "If_not_found (optional) - value to return if no match found",
+                    "Match_mode (optional) - 0 for exact match",
+                    "Search_mode (optional) - 1 for first-to-last, -1 for last-to-first"
+                  ]
+                },
+                {
+                  name: "LOOKUP",
+                  purpose: "Basic lookup function (less flexible than VLOOKUP/HLOOKUP)",
+                  syntax: "=LOOKUP(lookup_value, lookup_vector, [result_vector])",
+                  args: [
+                    "Lookup_value (mandatory) - value to search for",
+                    "Lookup_vector (mandatory) - single row or column to search",
+                    "Result_vector (optional) - single row or column to return values from"
+                  ]
+                },
+                {
+                  name: "INDEX",
+                  purpose: "Returns value from specific position in a range",
+                  syntax: "=INDEX(array, row_num, [column_num])",
+                  args: [
+                    "Array (mandatory) - cell range",
+                    "Row_num (mandatory) - row position in the array",
+                    "Column_num (optional) - column position in the array"
+                  ]
+                },
+                {
+                  name: "MATCH",
+                  purpose: "Returns the relative position of an item in a range",
+                  syntax: "=MATCH(lookup_value, lookup_array, [match_type])",
+                  args: [
+                    "Lookup_value (mandatory) - value to search for",
+                    "Lookup_array (mandatory) - range to search in",
+                    "Match_type (optional) - 0 for exact match, 1 for less than, -1 for greater than"
+                  ]
+                }
+              ]
+            },
+            {
+              name: "Text/String Functions",
+              functions: [
+                {
+                  name: "CONCATENATE",
+                  purpose: "Joins up to 30 text strings together",
+                  syntax: "=CONCATENATE(text1, text2, ...)",
+                  args: ["Text1, Text2, etc. (mandatory) - text strings or cell references to join"]
+                },
+                {
+                  name: "LEFT",
+                  purpose: "Extracts characters from the left side of text",
+                  syntax: "=LEFT(text, [num_chars])",
+                  args: [
+                    "Text (mandatory) - text string",
+                    "Num_chars (optional) - number of characters to extract (default is 1)"
+                  ]
+                },
+                {
+                  name: "RIGHT",
+                  purpose: "Extracts characters from the right side of text",
+                  syntax: "=RIGHT(text, [num_chars])",
+                  args: [
+                    "Text (mandatory) - text string",
+                    "Num_chars (optional) - number of characters to extract (default is 1)"
+                  ]
+                },
+                {
+                  name: "MID",
+                  purpose: "Extracts characters from the middle of text",
+                  syntax: "=MID(text, start_num, num_chars)",
+                  args: [
+                    "Text (mandatory) - text string",
+                    "Start_num (mandatory) - starting position",
+                    "Num_chars (mandatory) - number of characters to extract"
+                  ]
+                },
+                {
+                  name: "LEN",
+                  purpose: "Returns the number of characters in text",
+                  syntax: "=LEN(text)",
+                  args: ["Text (mandatory) - text string to count"]
+                },
+                {
+                  name: "FIND",
+                  purpose: "Finds position of substring (case-sensitive)",
+                  syntax: "=FIND(find_text, within_text, [start_num])",
+                  args: [
+                    "Find_text (mandatory) - text to find",
+                    "Within_text (mandatory) - text to search in",
+                    "Start_num (optional) - position to start search (default is 1)"
+                  ]
+                },
+                {
+                  name: "SEARCH",
+                  purpose: "Finds position of substring (case-insensitive, allows wildcards)",
+                  syntax: "=SEARCH(find_text, within_text, [start_num])",
+                  args: [
+                    "Find_text (mandatory) - text to find (can use * wildcard)",
+                    "Within_text (mandatory) - text to search in",
+                    "Start_num (optional) - position to start search"
+                  ]
+                },
+                {
+                  name: "UPPER",
+                  purpose: "Converts text to uppercase",
+                  syntax: "=UPPER(text)",
+                  args: ["Text (mandatory) - text to convert"]
+                },
+                {
+                  name: "LOWER",
+                  purpose: "Converts text to lowercase",
+                  syntax: "=LOWER(text)",
+                  args: ["Text (mandatory) - text to convert"]
+                },
+                {
+                  name: "EXACT",
+                  purpose: "Compares two strings for exact match (case-sensitive)",
+                  syntax: "=EXACT(text1, text2)",
+                  args: [
+                    "Text1 (mandatory) - first text string",
+                    "Text2 (mandatory) - second text string"
+                  ]
+                },
+                {
+                  name: "ISTEXT",
+                  purpose: "Tests if value is text",
+                  syntax: "=ISTEXT(value)",
+                  args: ["Value (mandatory) - value to test"]
+                },
+                {
+                  name: "ISNUMBER",
+                  purpose: "Tests if value is numeric",
+                  syntax: "=ISNUMBER(value)",
+                  args: ["Value (mandatory) - value to test"]
+                },
+                {
+                  name: "ISNONTEXT",
+                  purpose: "Tests if cell is blank or contains non-text",
+                  syntax: "=ISNONTEXT(value)",
+                  args: ["Value (mandatory) - value to test"]
+                },
+                {
+                  name: "CODE",
+                  purpose: "Returns ASCII code for first character",
+                  syntax: "=CODE(text)",
+                  args: ["Text (mandatory) - text string"]
+                },
+                {
+                  name: "CHAR",
+                  purpose: "Returns character for given ASCII code",
+                  syntax: "=CHAR(number)",
+                  args: ["Number (mandatory) - ASCII code value (1-255)"]
+                },
+                {
+                  name: "TEXT",
+                  purpose: "Formats a value as text with specific format",
+                  syntax: "=TEXT(value, format_text)",
+                  args: [
+                    "Value (mandatory) - numeric value or date",
+                    'Format_text (mandatory) - format code in quotes (e.g., "dd/mm/yyyy", "hh:mm")'
+                  ]
+                }
+              ]
+            },
+            {
+              name: "Number Base Conversion Functions",
+              functions: [
+                {
+                  name: "DEC2BIN",
+                  purpose: "Converts decimal to binary",
+                  syntax: "=DEC2BIN(number)",
+                  args: ["Number (mandatory) - decimal number to convert"]
+                },
+                {
+                  name: "DEC2HEX",
+                  purpose: "Converts decimal to hexadecimal",
+                  syntax: "=DEC2HEX(number)",
+                  args: ["Number (mandatory) - decimal number to convert"]
+                },
+                {
+                  name: "BIN2DEC",
+                  purpose: "Converts binary to decimal",
+                  syntax: "=BIN2DEC(number)",
+                  args: ["Number (mandatory) - binary number to convert"]
+                },
+                {
+                  name: "BIN2HEX",
+                  purpose: "Converts binary to hexadecimal",
+                  syntax: "=BIN2HEX(number)",
+                  args: ["Number (mandatory) - binary number to convert"]
+                },
+                {
+                  name: "HEX2BIN",
+                  purpose: "Converts hexadecimal to binary",
+                  syntax: "=HEX2BIN(number)",
+                  args: ["Number (mandatory) - hexadecimal number to convert"]
+                },
+                {
+                  name: "HEX2DEC",
+                  purpose: "Converts hexadecimal to decimal",
+                  syntax: "=HEX2DEC(number)",
+                  args: ["Number (mandatory) - hexadecimal number to convert"]
+                }
+              ]
+            },
+            {
+              name: "Date and Time Functions",
+              functions: [
+                {
+                  name: "DATE",
+                  purpose: "Creates a date from year, month, day values",
+                  syntax: "=DATE(year, month, day)",
+                  args: [
+                    "Year (mandatory) - year value",
+                    "Month (mandatory) - month value (1-12)",
+                    "Day (mandatory) - day value (1-31)"
+                  ]
+                },
+                {
+                  name: "TIME",
+                  purpose: "Creates a time from hour, minute, second values",
+                  syntax: "=TIME(hour, minute, second)",
+                  args: [
+                    "Hour (mandatory) - hour value (0-23)",
+                    "Minute (mandatory) - minute value (0-59)",
+                    "Second (mandatory) - second value (0-59)"
+                  ]
+                },
+                {
+                  name: "DAY",
+                  purpose: "Extracts day from a date",
+                  syntax: "=DAY(date)",
+                  args: ["Date (mandatory) - date value"]
+                },
+                {
+                  name: "MONTH",
+                  purpose: "Extracts month from a date",
+                  syntax: "=MONTH(date)",
+                  args: ["Date (mandatory) - date value"]
+                },
+                {
+                  name: "YEAR",
+                  purpose: "Extracts year from a date",
+                  syntax: "=YEAR(date)",
+                  args: ["Date (mandatory) - date value"]
+                },
+                {
+                  name: "HOUR",
+                  purpose: "Extracts hour from a time",
+                  syntax: "=HOUR(time)",
+                  args: ["Time (mandatory) - time value"]
+                },
+                {
+                  name: "MINUTE",
+                  purpose: "Extracts minute from a time",
+                  syntax: "=MINUTE(time)",
+                  args: ["Time (mandatory) - time value"]
+                },
+                {
+                  name: "SECOND",
+                  purpose: "Extracts second from a time",
+                  syntax: "=SECOND(time)",
+                  args: ["Time (mandatory) - time value"]
+                },
+                {
+                  name: "WEEKDAY",
+                  purpose: "Returns day of week as number (1=Sunday, 2=Monday, etc.)",
+                  syntax: "=WEEKDAY(date)",
+                  args: ["Date (mandatory) - date value"]
+                },
+                {
+                  name: "DATEDIF",
+                  purpose: "Calculates difference between two dates (undocumented in Excel)",
+                  syntax: "=DATEDIF(start_date, end_date, unit)",
+                  args: [
+                    "Start_date (mandatory) - earlier date",
+                    "End_date (mandatory) - later date",
+                    'Unit (mandatory) - "D" for days, "M" for months, "Y" for years, "MD" for days ignoring months/years, "YM" for months ignoring days/years'
+                  ]
+                }
+              ]
+            },
+            {
+              name: "Array and Data Functions",
+              functions: [
+                {
+                  name: "TRANSPOSE",
+                  purpose: "Converts rows to columns and vice versa",
+                  syntax: "=TRANSPOSE(array)",
+                  args: ["Array (mandatory) - range to transpose"]
+                },
+                {
+                  name: "SUBTOTAL",
+                  purpose: "Performs various functions with a code",
+                  syntax: "=SUBTOTAL(function_num, ref1, [ref2], ...)",
+                  args: [
+                    "Function_num (mandatory) - code 1-10 (1=AVERAGE, 2=COUNT, 3=COUNTA, 4=MAX, 5=MIN, 6=PRODUCT, 9=SUM)",
+                    "Ref1 (mandatory) - first range",
+                    "Ref2, etc. (optional) - additional ranges"
+                  ]
+                }
+              ]
+            },
+            {
+              name: "Mathematical Operators",
+              operators: [
+                { symbol: "+", name: "Addition", syntax: "=value1 + value2", purpose: "Adds values" },
+                { symbol: "-", name: "Subtraction", syntax: "=value1 - value2", purpose: "Subtracts values" },
+                { symbol: "*", name: "Multiplication", syntax: "=value1 * value2", purpose: "Multiplies values" },
+                { symbol: "/", name: "Division", syntax: "=value1 / value2", purpose: "Divides values" },
+                { symbol: "^", name: "Exponentiation", syntax: "=value1 ^ value2", purpose: "Raises to a power" },
+                { symbol: "&", name: "Concatenation", syntax: "=text1 & text2", purpose: "Joins text strings" }
+              ]
+            }
+          ];
+
+          return (
+            <div className="min-h-screen bg-white">
+              <style>{`
+                @media print {
+                  body { margin: 0; padding: 0; }
+                  .no-print { display: none !important; }
+                  .print-page { page-break-inside: avoid; }
+                  h2 { page-break-after: avoid; }
+                }
+              `}</style>
+              
+              <div className="max-w-5xl mx-auto p-8">
+                
+                <div className="mb-8">
+                  <h1 className="text-4xl font-bold text-indigo-900 mb-2">
+                    Spreadsheet Functions Reference
+                  </h1>
+                  <p className="text-lg text-gray-600">Chapter 8 - Complete Function List</p>
+                  <p className="text-sm text-gray-500 mt-2">All functions verified from the textbook</p>
+                </div>
+
+                {categories.map((category, idx) => (
+                  <div key={idx} className="mb-8">
+                    <h2 className="text-2xl font-bold text-indigo-700 mb-4 pb-2 border-b-2 border-indigo-200">
+                      {category.name}
+                    </h2>
+                    
+                    {category.functions && category.functions.map((func, funcIdx) => (
+                      <div key={funcIdx} className="mb-6 pl-4 border-l-4 border-indigo-300">
+                        <h3 className="text-xl font-bold text-indigo-900 mb-2">
+                          {func.name}
+                        </h3>
+                        <p className="text-gray-700 mb-2">
+                          <span className="font-semibold">Purpose:</span> {func.purpose}
+                        </p>
+                        <p className="text-gray-700 mb-2 font-mono text-sm bg-gray-100 p-2 rounded">
+                          <span className="font-semibold">Syntax:</span> {func.syntax}
+                        </p>
+                        <div className="mt-2">
+                          <p className="font-semibold text-gray-800 mb-1">Arguments:</p>
+                          <ul className="list-disc list-inside pl-4 text-gray-700">
+                            {func.args.map((arg, argIdx) => (
+                              <li key={argIdx} className="text-sm mb-1">{arg}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    ))}
+
+                    {category.operators && (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {category.operators.map((op, opIdx) => (
+                          <div key={opIdx} className="bg-indigo-50 p-4 rounded-lg">
+                            <h3 className="text-lg font-bold text-indigo-900 mb-1">
+                              {op.name} ({op.symbol})
+                            </h3>
+                            <p className="text-gray-700 text-sm mb-1">
+                              <span className="font-semibold">Purpose:</span> {op.purpose}
+                            </p>
+                            <p className="text-gray-700 text-sm font-mono bg-white p-2 rounded">
+                              {op.syntax}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+
+                <div className="mt-8 p-6 bg-indigo-50 rounded-lg border-l-4 border-indigo-500">
+                  <h3 className="text-lg font-bold text-indigo-900 mb-2">📝 Notes</h3>
+                  <ul className="list-disc list-inside text-gray-700 space-y-1">
+                    <li>All functions mentioned are from Chapter 8 of the textbook</li>
+                    <li>Arguments marked as (mandatory) must be included</li>
+                    <li>Arguments marked as (optional) can be omitted</li>
+                    <li>Text values in formulas should be enclosed in quotes</li>
+                    <li>Cell references should not be enclosed in quotes</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<SpreadsheetFunctions />);
+        
+    </script>
+</body>
+</html>
