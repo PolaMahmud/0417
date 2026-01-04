@@ -197,6 +197,18 @@
       padding-left: 18px;
     }
 
+    /* --- Special Class for Two Column Lists (Questions Section) --- */
+    .two-column-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem; /* Space between columns and rows */
+    }
+
+    /* Remove bottom margin from li inside the grid so grid-gap handles spacing */
+    .two-column-list li {
+      margin-bottom: 0;
+    }
+
     /* --- 8. TikTok Footer --- */
     .social-footer {
       margin-top: 4rem;
@@ -309,12 +321,20 @@
           <span class="folder-icon">❓</span>
           <h2>Questions</h2>
         </div>
-        <ul>
+        <!-- Updated List with two-column-list class -->
+        <ul class="two-column-list">
           <li><a href="QPC1.pdf" target="_blank" class="resource-link">Chapter 1</a></li>
+          <li><a href="MS1.pdf" target="_blank" class="resource-link">MS</a></li>
           <li><a href="QPC2.pdf" target="_blank" class="resource-link">Chapter 2</a></li>
+          <li><a href="MS2.pdf" target="_blank" class="resource-link">MS</a></li>
           <li><a href="QPC3.pdf" target="_blank" class="resource-link">Chapter 3</a></li>
+          <li><a href="MS3.pdf" target="_blank" class="resource-link">MS</a></li>
           <li><a href="QPC4.pdf" target="_blank" class="resource-link">Chapter 4</a></li>
+          <li><a href="MS4.pdf" target="_blank" class="resource-link">MS</a></li>
           <li><a href="QPC5.pdf" target="_blank" class="resource-link">Chapter 5</a></li>
+          <li><a href="MS5.pdf" target="_blank" class="resource-link">MS</a></li>
+          <li><a href="QPC6.pdf" target="_blank" class="resource-link">Chapter 6</a></li>
+          <li><a href="MS6.pdf" target="_blank" class="resource-link">MS</a></li>
         </ul>
       </div>
     </div>
