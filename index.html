@@ -1,400 +1,372 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="slate" data-mode="auto">
+<!--
+  ╔══════════════════════════════════════════════════════════╗
+  ║  THEME SYSTEM                                           ║
+  ║                                                         ║
+  ║  To change the color theme, edit data-theme above.      ║
+  ║  Available themes:                                      ║
+  ║    forest   — green & earthy (default)                  ║
+  ║    ocean    — deep blue & teal                          ║
+  ║    sunset   — warm coral & amber                        ║
+  ║    lavender — soft purple & pink                        ║
+  ║    slate    — neutral gray & steel                      ║
+  ║    rose     — warm pink & burgundy                      ║
+  ║                                                         ║
+  ║  Users can toggle light/dark mode via the button        ║
+  ║  in the top-right corner. Their choice is saved.        ║
+  ╚══════════════════════════════════════════════════════════╝
+-->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="icon.png">
-  <title>ICT 0417 Resources</title>
-  
+  <title>ICT 0417 — IGCSE Study Resources</title>
+  <meta name="description" content="Free IGCSE ICT 0417 study resources: chapter slides, textbook, syllabus, past paper questions and mark schemes.">
+  <meta property="og:title" content="ICT 0417 — IGCSE Study Resources">
+  <meta property="og:description" content="Chapter slides, textbook, syllabus, questions & mark schemes for Cambridge IGCSE ICT 0417.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://polamahmud.github.io/0417/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📘</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <script>
+    (function(){
+      var m = localStorage.getItem('ict0417-mode');
+      if (m === 'light' || m === 'dark') document.documentElement.setAttribute('data-mode', m);
+    })();
+  </script>
   <style>
-    /* --- 1. CSS Variables (The Color Palette) --- */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ═══════ THEME PALETTES ═══════ */
+
+    [data-theme="forest"] {
+      --accent:#2D6A4F; --accent-lt:#E9F5EF; --accent-hv:#1E4D38;
+      --sec:#1D5B9E; --sec-lt:#EAF1F9;
+      --tri:#92650A; --tri-lt:#FEF5E0;
+      --hi:#B04A2E; --hi-lt:#FDF0EC;
+      --accent-dk:#52B788; --accent-lt-dk:#1A2E24; --accent-hv-dk:#74D4A4;
+      --sec-dk:#6AACF0; --sec-lt-dk:#1A2533;
+      --tri-dk:#E8B44A; --tri-lt-dk:#2A2210;
+      --hi-dk:#E8845A; --hi-lt-dk:#2A1A14;
+    }
+    [data-theme="ocean"] {
+      --accent:#1565A8; --accent-lt:#E3F0FB; --accent-hv:#0D4A7A;
+      --sec:#0E7C6B; --sec-lt:#E0F5F0;
+      --tri:#7C5C1E; --tri-lt:#FDF3DA;
+      --hi:#9E3A5C; --hi-lt:#FBEDF2;
+      --accent-dk:#5CADE8; --accent-lt-dk:#132A3D; --accent-hv-dk:#8CC8F2;
+      --sec-dk:#4ECAB5; --sec-lt-dk:#0F2925;
+      --tri-dk:#E0B44C; --tri-lt-dk:#2A2210;
+      --hi-dk:#E07898; --hi-lt-dk:#2E1520;
+    }
+    [data-theme="sunset"] {
+      --accent:#C2510E; --accent-lt:#FEF0E5; --accent-hv:#923C09;
+      --sec:#8B6914; --sec-lt:#FDF6E3;
+      --tri:#2D6A4F; --tri-lt:#E9F5EF;
+      --hi:#A03060; --hi-lt:#FCEDF3;
+      --accent-dk:#F09050; --accent-lt-dk:#2E1A0C; --accent-hv-dk:#F4AD78;
+      --sec-dk:#E4C24A; --sec-lt-dk:#2A2210;
+      --tri-dk:#52B788; --tri-lt-dk:#1A2E24;
+      --hi-dk:#E87098; --hi-lt-dk:#2E1520;
+    }
+    [data-theme="lavender"] {
+      --accent:#6C47B8; --accent-lt:#F0ECFA; --accent-hv:#4E3290;
+      --sec:#B8478B; --sec-lt:#FAEDF5;
+      --tri:#3A7CA5; --tri-lt:#E6F1FA;
+      --hi:#C27020; --hi-lt:#FDF2E4;
+      --accent-dk:#A68AE0; --accent-lt-dk:#201838; --accent-hv-dk:#C4B0F0;
+      --sec-dk:#E07AB5; --sec-lt-dk:#2E152A;
+      --tri-dk:#68B8E0; --tri-lt-dk:#142430;
+      --hi-dk:#E8A050; --hi-lt-dk:#2A1E0E;
+    }
+    [data-theme="slate"] {
+      --accent:#4A5568; --accent-lt:#EDF0F4; --accent-hv:#2D3748;
+      --sec:#2B6CB0; --sec-lt:#EBF4FF;
+      --tri:#7B6B3A; --tri-lt:#F9F5EA;
+      --hi:#9B4040; --hi-lt:#FAECEC;
+      --accent-dk:#A0AEC0; --accent-lt-dk:#1A1E28; --accent-hv-dk:#CBD5E0;
+      --sec-dk:#63B3ED; --sec-lt-dk:#152033;
+      --tri-dk:#D4B86A; --tri-lt-dk:#282010;
+      --hi-dk:#F08080; --hi-lt-dk:#2A1414;
+    }
+    [data-theme="rose"] {
+      --accent:#B8365A; --accent-lt:#FCEDF1; --accent-hv:#8C2844;
+      --sec:#7C4DAA; --sec-lt:#F2ECF9;
+      --tri:#2D7E6F; --tri-lt:#E5F5F0;
+      --hi:#B07820; --hi-lt:#FDF4E5;
+      --accent-dk:#F07898; --accent-lt-dk:#2E1520; --accent-hv-dk:#F4A0B8;
+      --sec-dk:#B890E0; --sec-lt-dk:#201838;
+      --tri-dk:#4ECAB5; --tri-lt-dk:#0F2925;
+      --hi-dk:#E8B44A; --hi-lt-dk:#2A2210;
+    }
+
+    /* ═══════ LIGHT MODE BASE ═══════ */
     :root {
-      /* LIGHT THEME (Default) */
-      --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-      --card-bg: #ffffff;
-      --text-main: #333;
-      --text-light: #666;
-      --primary-color: #0073e6;
-      
-      --folder-bg: #fafafa;
-      --folder-border: #eee;
-      --folder-hover-shadow: 0 10px 20px rgba(0,0,0,0.1);
-      
-      --link-bg: #ffffff;
-      --link-hover-bg: #eef4ff;
-      --link-border: transparent;
-      
-      --tiktok-bg: #000;
-      --tiktok-text: #fff;
-      --shadow-soft: 0 10px 30px rgba(0,0,0,0.05);
-      --icon-sun: none;
-      --icon-moon: inline-block;
+      --bg:#FAF8F5; --bg-card:#FFFFFF; --bg-hov:#F3F0EB;
+      --txt:#1A1A18; --txt2:#6B6A65; --txt3:#9C9B95;
+      --brd:#E8E5DE;
+      --sh-sm:0 1px 2px rgba(0,0,0,.04); --sh-md:0 4px 16px rgba(0,0,0,.06);
+      --r:12px; --rl:16px;
     }
 
-    /* DARK THEME OVERRIDES */
-    [data-theme="dark"] {
-      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      --card-bg: #1e293b;
-      --text-main: #f1f5f9;
-      --text-light: #94a3b8;
-      --primary-color: #60a5fa; /* Lighter blue for dark mode */
-      
-      --folder-bg: #334155;
-      --folder-border: #475569;
-      --folder-hover-shadow: 0 10px 20px rgba(0,0,0,0.3);
-      
-      --link-bg: #1e293b; /* Matches card bg */
-      --link-hover-bg: #334155;
-      --link-border: #475569;
-      
-      --tiktok-bg: #f1f5f9; /* White button in dark mode */
-      --tiktok-text: #000;
-      --shadow-soft: 0 10px 30px rgba(0,0,0,0.3);
-      --icon-sun: inline-block;
-      --icon-moon: none;
+    /* ═══════ DARK MODE ═══════ */
+    [data-mode="dark"] {
+      --bg:#141413; --bg-card:#1E1E1C; --bg-hov:#2A2A27;
+      --txt:#EDECEA; --txt2:#A3A29C; --txt3:#6B6A65;
+      --brd:#2E2E2B;
+      --sh-sm:0 1px 2px rgba(0,0,0,.2); --sh-md:0 4px 16px rgba(0,0,0,.3);
+      --accent:var(--accent-dk); --accent-lt:var(--accent-lt-dk); --accent-hv:var(--accent-hv-dk);
+      --sec:var(--sec-dk); --sec-lt:var(--sec-lt-dk);
+      --tri:var(--tri-dk); --tri-lt:var(--tri-lt-dk);
+      --hi:var(--hi-dk); --hi-lt:var(--hi-lt-dk);
     }
-
-    /* --- 2. Global Resets --- */
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg-gradient);
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: var(--text-main);
-      transition: background 0.3s ease;
-    }
-
-    /* --- 3. Main Container --- */
-    .container {
-      background: var(--card-bg);
-      padding: 3rem;
-      border-radius: 20px;
-      box-shadow: var(--shadow-soft);
-      text-align: center;
-      width: 85%;
-      max-width: 1100px;
-      margin: 2rem 0;
-      position: relative; /* Needed for positioning the toggle switch */
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    /* --- 4. Theme Toggle Button --- */
-    .theme-switch-wrapper {
-      position: absolute;
-      top: 2rem;
-      right: 2rem;
-      display: flex;
-      align-items: center;
-    }
-    
-    .theme-btn {
-      background: transparent;
-      border: 2px solid var(--folder-border);
-      color: var(--text-main);
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-    }
-
-    .theme-btn:hover {
-      background: var(--folder-bg);
-      transform: rotate(15deg);
-    }
-
-    /* Icons inside button */
-    .sun-icon { display: var(--icon-sun); }
-    .moon-icon { display: var(--icon-moon); }
-
-    /* --- 5. Content Typography --- */
-    h1 {
-      margin-top: 0;
-      color: var(--text-main);
-      font-weight: 700;
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    p.subtitle {
-      color: var(--text-light);
-      margin-bottom: 3rem;
-      font-size: 1.1rem;
-    }
-
-    /* --- 6. Grid System --- */
-    .folders {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      margin-top: 2rem;
-      text-align: left;
-    }
-
-    .folder {
-      background: var(--folder-bg);
-      padding: 1.5rem;
-      border-radius: 15px;
-      border: 1px solid var(--folder-border);
-      transition: transform 0.2s ease, background 0.3s ease;
-    }
-
-    .folder:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--folder-hover-shadow);
-    }
-
-    .folder-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--folder-border);
-    }
-
-    .folder-icon {
-      font-size: 1.8rem;
-      margin-right: 0.8rem;
-    }
-
-    .folder h2 {
-      font-size: 1.3rem;
-      margin: 0;
-      color: var(--text-main);
-    }
-
-    /* --- 7. Links/Buttons --- */
-    ul { list-style: none; padding: 0; margin: 0; }
-    li { margin-bottom: 0.5rem; }
-
-    .resource-link {
-      display: block;
-      padding: 10px 12px;
-      border-radius: 8px;
-      text-decoration: none;
-      color: var(--text-main);
-      font-weight: 500;
-      font-size: 0.95rem;
-      background-color: var(--link-bg);
-      border: 1px solid var(--link-border);
-      transition: all 0.2s;
-    }
-
-    .resource-link:hover {
-      background-color: var(--link-hover-bg);
-      color: var(--primary-color);
-      padding-left: 18px;
-    }
-
-    /* --- Special Class for Two Column Lists (Questions Section) --- */
-    .two-column-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.8rem; /* Space between columns and rows */
-    }
-
-    /* Remove bottom margin from li inside the grid so grid-gap handles spacing */
-    .two-column-list li {
-      margin-bottom: 0;
-    }
-
-    /* --- 8. TikTok Footer --- */
-    .social-footer {
-      margin-top: 4rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--folder-border);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .slogan {
-      color: var(--text-light);
-      font-style: italic;
-      font-weight: 400;
-      margin: 0;
-    }
-
-    .tiktok-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background-color: var(--tiktok-bg);
-      color: var(--tiktok-text) !important;
-      padding: 12px 28px;
-      border-radius: 50px;
-      font-weight: 500;
-      text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-
-    .tiktok-btn:hover {
-      transform: scale(1.05);
-      opacity: 0.9;
-    }
-
-    /* --- 9. Mobile Responsiveness --- */
-    @media (max-width: 768px) {
-      .container {
-        width: 90%;
-        padding: 1.5rem;
-        margin: 1rem auto;
+    @media (prefers-color-scheme: dark) {
+      [data-mode="auto"] {
+        --bg:#141413; --bg-card:#1E1E1C; --bg-hov:#2A2A27;
+        --txt:#EDECEA; --txt2:#A3A29C; --txt3:#6B6A65;
+        --brd:#2E2E2B;
+        --sh-sm:0 1px 2px rgba(0,0,0,.2); --sh-md:0 4px 16px rgba(0,0,0,.3);
+        --accent:var(--accent-dk); --accent-lt:var(--accent-lt-dk); --accent-hv:var(--accent-hv-dk);
+        --sec:var(--sec-dk); --sec-lt:var(--sec-lt-dk);
+        --tri:var(--tri-dk); --tri-lt:var(--tri-lt-dk);
+        --hi:var(--hi-dk); --hi-lt:var(--hi-lt-dk);
       }
-      
-      /* Move theme toggle to align better on mobile */
-      .theme-switch-wrapper {
-        position: relative;
-        top: 0;
-        right: 0;
-        justify-content: flex-end;
-        margin-bottom: 1rem;
-      }
+    }
 
-      h1 { font-size: 2rem; }
-      
-      .folders {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-      
-      .resource-link {
-        padding: 12px 15px;
-      }
+    /* ═══════ COMPONENTS ═══════ */
+
+    body { font-family:'DM Sans',system-ui,sans-serif; background:var(--bg); color:var(--txt); line-height:1.6; min-height:100vh; transition:background .3s,color .3s; }
+
+    .mode-toggle {
+      position:fixed; top:1rem; right:1rem; z-index:100;
+      display:flex; gap:0; background:var(--bg-card); border:1px solid var(--brd);
+      border-radius:100px; padding:3px; box-shadow:var(--sh-md); transition:all .3s;
+    }
+    .mode-toggle button {
+      all:unset; width:34px; height:34px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; transition:background .2s; color:var(--txt3);
+    }
+    .mode-toggle button:hover { background:var(--bg-hov); }
+    .mode-toggle button.active { background:var(--accent-lt); color:var(--accent); }
+    .mode-toggle button svg { width:18px; height:18px; }
+
+    .hero { text-align:center; padding:4rem 1.5rem 3rem; position:relative; overflow:hidden; }
+    .hero::before {
+      content:''; position:absolute; inset:0; pointer-events:none; opacity:.6; transition:background .3s;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 40%, var(--accent-lt) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 80% 30%, var(--sec-lt) 0%, transparent 70%);
+    }
+    .hero-badge {
+      display:inline-block; font-size:.75rem; font-weight:600; letter-spacing:.08em;
+      text-transform:uppercase; color:var(--accent); background:var(--accent-lt);
+      border:1px solid var(--accent); border-radius:100px; padding:.35rem 1rem;
+      margin-bottom:1.25rem; position:relative; transition:all .3s;
+    }
+    .hero h1 {
+      font-family:'DM Serif Display',Georgia,serif;
+      font-size:clamp(2rem,5vw,3.2rem); font-weight:400;
+      line-height:1.15; letter-spacing:-.02em; margin-bottom:.75rem; position:relative;
+    }
+    .hero p { font-size:1.05rem; color:var(--txt2); max-width:480px; margin:0 auto; position:relative; }
+
+    .container { max-width:900px; margin:0 auto; padding:0 1.5rem 4rem; }
+
+    .section { margin-bottom:2.5rem; }
+    .section-header {
+      display:flex; align-items:center; gap:.6rem; margin-bottom:1rem;
+      padding-bottom:.6rem; border-bottom:1px solid var(--brd); transition:border-color .3s;
+    }
+    .section-icon {
+      width:36px; height:36px; border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0; transition:all .3s;
+    }
+    .section-icon.slides    { background:var(--accent-lt); color:var(--accent); }
+    .section-icon.material  { background:var(--sec-lt); color:var(--sec); }
+    .section-icon.questions { background:var(--tri-lt); color:var(--tri); }
+    .section-header h2 { font-size:1.15rem; font-weight:600; letter-spacing:-.01em; }
+    .section-header span.count { font-size:.8rem; color:var(--txt3); margin-left:auto; }
+
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:.65rem; }
+    .grid a {
+      display:flex; align-items:center; gap:.6rem; padding:.75rem 1rem;
+      background:var(--bg-card); border:1px solid var(--brd); border-radius:var(--r);
+      text-decoration:none; color:var(--txt); font-weight:500; font-size:.92rem;
+      transition:all .15s ease; box-shadow:var(--sh-sm);
+    }
+    .grid a:hover,.grid a:focus-visible {
+      background:var(--bg-hov); border-color:var(--accent);
+      box-shadow:var(--sh-md); transform:translateY(-1px);
+    }
+    .grid a .pdf-icon {
+      width:28px; height:28px; border-radius:6px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:.7rem; font-weight:700; flex-shrink:0; letter-spacing:.02em; transition:all .3s;
+    }
+    .pdf-icon.slide { background:var(--accent-lt); color:var(--accent); }
+    .pdf-icon.book  { background:var(--sec-lt); color:var(--sec); }
+
+    .q-table {
+      width:100%; border-collapse:separate; border-spacing:0;
+      background:var(--bg-card); border:1px solid var(--brd);
+      border-radius:var(--rl); overflow:hidden; box-shadow:var(--sh-sm); transition:all .3s;
+    }
+    .q-table thead th {
+      text-align:left; font-size:.78rem; font-weight:600; letter-spacing:.04em;
+      text-transform:uppercase; color:var(--txt3); padding:.85rem 1rem;
+      background:var(--bg-hov); border-bottom:1px solid var(--brd);
+    }
+    .q-table tbody tr { transition:background .1s; }
+    .q-table tbody tr:hover { background:var(--bg-hov); }
+    .q-table tbody td { padding:.7rem 1rem; font-size:.92rem; border-bottom:1px solid var(--brd); vertical-align:middle; }
+    .q-table tbody tr:last-child td { border-bottom:none; }
+    .q-table td:first-child { font-weight:500; }
+
+    .q-table a.pill {
+      display:inline-flex; align-items:center; gap:.35rem; padding:.3rem .75rem;
+      border-radius:100px; text-decoration:none; font-size:.82rem; font-weight:500; transition:all .15s ease;
+    }
+    .pill.paper { background:var(--hi-lt); color:var(--hi); }
+    .pill.paper:hover,.pill.paper:focus-visible { box-shadow:0 0 0 2px var(--hi); }
+    .pill.ms { background:var(--accent-lt); color:var(--accent); }
+    .pill.ms:hover,.pill.ms:focus-visible { box-shadow:0 0 0 2px var(--accent); }
+    .pill svg { width:14px; height:14px; }
+
+    footer {
+      text-align:center; padding:2rem 1.5rem 2.5rem;
+      border-top:1px solid var(--brd); color:var(--txt3); font-size:.85rem; transition:border-color .3s;
+    }
+    footer a { color:var(--txt2); text-decoration:none; font-weight:500; transition:color .15s; }
+    footer a:hover { color:var(--accent); }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-badge,.hero h1,.hero p,.section,footer { animation:fadeUp .5s ease both; }
+      .hero-badge { animation-delay:.05s; }
+      .hero h1 { animation-delay:.12s; }
+      .hero p { animation-delay:.2s; }
+      .section:nth-child(1) { animation-delay:.25s; }
+      .section:nth-child(2) { animation-delay:.32s; }
+      .section:nth-child(3) { animation-delay:.4s; }
+      footer { animation-delay:.5s; }
+    }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+
+    @media (max-width:600px) {
+      .hero { padding:3rem 1.25rem 2rem; }
+      .grid { grid-template-columns:1fr 1fr; gap:.5rem; }
+      .grid a { padding:.65rem .75rem; font-size:.85rem; }
+      .q-table { font-size:.85rem; }
+      .q-table thead th,.q-table tbody td { padding:.6rem .65rem; }
+      .pill { font-size:.78rem; padding:.25rem .6rem; }
+      .mode-toggle { top:.65rem; right:.65rem; }
+      .mode-toggle button { width:30px; height:30px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    
-    <div class="theme-switch-wrapper">
-      <button class="theme-btn" id="theme-toggle" aria-label="Toggle Dark Mode">
-        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-      </button>
-    </div>
+  <nav class="mode-toggle" role="group" aria-label="Appearance">
+    <button onclick="setMode('light')" id="btn-light" title="Light mode" aria-label="Light mode">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <button onclick="setMode('auto')" id="btn-auto" title="System default" aria-label="System default">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+    </button>
+    <button onclick="setMode('dark')" id="btn-dark" title="Dark mode" aria-label="Dark mode">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button>
+  </nav>
 
-    <h1>Welcome</h1>
-    <p class="subtitle">ICT 0417 Learning Hub</p>
+  <header class="hero" role="banner">
+    <div class="hero-badge" aria-label="Course code">Cambridge IGCSE</div>
+    <h1>ICT 0417 Learning Hub</h1>
+    <p>Chapter slides, textbook, syllabus, questions &amp; mark schemes — all in one place.</p>
+  </header>
 
-    <div class="folders">
-      <div class="folder">
-        <div class="folder-header">
-          <span class="folder-icon">📚</span>
-          <h2>Slides</h2>
+  <main class="container" role="main">
+
+    <section class="section" aria-labelledby="slides-heading">
+      <div class="section-header">
+        <div class="section-icon slides" aria-hidden="true">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
         </div>
-        <ul>
-          <li><a href="Ch1.pdf" target="_blank" class="resource-link">Chapter 1</a></li>
-          <li><a href="Ch2.pdf" target="_blank" class="resource-link">Chapter 2</a></li>
-          <li><a href="Ch3.pdf" target="_blank" class="resource-link">Chapter 3</a></li>
-          <li><a href="Ch4.pdf" target="_blank" class="resource-link">Chapter 4</a></li>
-          <li><a href="Ch5.pdf" target="_blank" class="resource-link">Chapter 5</a></li>
-          <li><a href="Ch6.pdf" target="_blank" class="resource-link">Chapter 6</a></li>
-          <li><a href="Ch7.pdf" target="_blank" class="resource-link">Chapter 7</a></li>
-          <li><a href="Ch8.pdf" target="_blank" class="resource-link">Chapter 8</a></li>
-          <li><a href="Ch9.pdf" target="_blank" class="resource-link">Chapter 9</a></li>
-          <li><a href="Ch10.pdf" target="_blank" class="resource-link">Chapter 10</a></li>
-        </ul>
+        <h2 id="slides-heading">Slides</h2>
+        <span class="count">8 chapters</span>
       </div>
+      <div class="grid" role="list">
+        <a href="https://polamahmud.github.io/0417/Ch1.pdf" role="listitem" target="_blank" rel="noopener"><span class="pdf-icon slide" aria-hidden="true">PDF</span> Chapter 1</a>
+        <a href="https://polamahmud.github.io/0417/Ch2.pdf" role="listitem" target="_blank" rel="noopener"><span class="pdf-icon slide" aria-hidden="true">PDF</span> Chapter 2</a>
+        <a href="https://polamahmud.github.io/0417/Ch3.pdf" role="listitem" target="_blank" rel="noopener"><span class="pdf-icon slide" aria-hidden="true">PDF</span> Chapter 3</a>
+        <a href="https://polamahmud.github.io/0417/Ch4.pdf" role="listitem" target="_blank" rel="noopener"><span class="pdf-icon slide" aria-hidden="true">PDF</span> Chapter 4</a>
+        <a href="https://polamahmud.github.io/0417/Ch5.pdf" role="listitem" target="_blank" rel="noopener"><span class="pdf-icon slide" aria-hidden="true">PDF</span> Chapter 5</a>
+        <a href="https://polamahmud.github.io/0417/Ch6.pdf" role="listitem" target="_blank" rel="noopener"><span class="pdf-icon slide" aria-hidden="true">PDF</span> Chapter 6</a>
+        <a href="https://polamahmud.github.io/0417/Ch7.pdf" role="listitem" target="_blank" rel="noopener"><span class="pdf-icon slide" aria-hidden="true">PDF</span> Chapter 7</a>
+        <a href="https://polamahmud.github.io/0417/Ch8.pdf" role="listitem" target="_blank" rel="noopener"><span class="pdf-icon slide" aria-hidden="true">PDF</span> Chapter 8</a>
+        <a href="https://polamahmud.github.io/0417/Ch9.pdf" role="listitem" target="_blank" rel="noopener"><span class="pdf-icon slide" aria-hidden="true">PDF</span> Chapter 9</a>
+        <a href="https://polamahmud.github.io/0417/Ch10.pdf" role="listitem" target="_blank" rel="noopener"><span class="pdf-icon slide" aria-hidden="true">PDF</span> Chapter 10</a>
+      </div>
+    </section>
 
-      <div class="folder">
-        <div class="folder-header">
-          <span class="folder-icon">📘</span>
-          <h2>Material</h2>
+    <section class="section" aria-labelledby="material-heading">
+      <div class="section-header">
+        <div class="section-icon material" aria-hidden="true">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
         </div>
-        <ul>
-          <li><a href="BOK.pdf" target="_blank" class="resource-link">Textbook</a></li>
-          <li><a href="0417S.pdf" target="_blank" class="resource-link">Syllabus</a></li>
-          <li><a href="TP.pdf" target="_blank" class="resource-link">Topical Papers</a></li>
-        </ul>
+        <h2 id="material-heading">Material</h2>
       </div>
+      <div class="grid" role="list">
+        <a href="https://polamahmud.github.io/0417/BOK.pdf" role="listitem" target="_blank" rel="noopener"><span class="pdf-icon book" aria-hidden="true">PDF</span> Textbook</a>
+        <a href="https://polamahmud.github.io/0417/0417S.pdf" role="listitem" target="_blank" rel="noopener"><span class="pdf-icon book" aria-hidden="true">PDF</span> Syllabus</a>
+      </div>
+    </section>
 
-      <div class="folder">
-        <div class="folder-header">
-          <span class="folder-icon">❓</span>
-          <h2>Questions</h2>
+    <section class="section" aria-labelledby="questions-heading">
+      <div class="section-header">
+        <div class="section-icon questions" aria-hidden="true">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         </div>
-        <!-- Updated List with two-column-list class -->
-        <ul class="two-column-list">
-          <li><a href="QPC1.pdf" target="_blank" class="resource-link">Chapter 1</a></li>
-          <li><a href="MS1.pdf" target="_blank" class="resource-link">MS</a></li>
-          <li><a href="QPC2.pdf" target="_blank" class="resource-link">Chapter 2</a></li>
-          <li><a href="MS2.pdf" target="_blank" class="resource-link">MS</a></li>
-          <li><a href="QPC3.pdf" target="_blank" class="resource-link">Chapter 3</a></li>
-          <li><a href="MS3.pdf" target="_blank" class="resource-link">MS</a></li>
-          <li><a href="QPC4.pdf" target="_blank" class="resource-link">Chapter 4</a></li>
-          <li><a href="MS4.pdf" target="_blank" class="resource-link">MS</a></li>
-          <li><a href="QPC5.pdf" target="_blank" class="resource-link">Chapter 5</a></li>
-          <li><a href="MS5.pdf" target="_blank" class="resource-link">MS</a></li>
-          <li><a href="QPC6.pdf" target="_blank" class="resource-link">Chapter 6</a></li>
-          <li><a href="MS6.pdf" target="_blank" class="resource-link">MS</a></li>
-          <li><a href="QPC7.pdf" target="_blank" class="resource-link">Chapter 7</a></li>
-          <li><a href="MS7.pdf" target="_blank" class="resource-link">MS</a></li>
-          <li><a href="QPC8.pdf" target="_blank" class="resource-link">Chapter 8</a></li>
-          <li><a href="MS8.pdf" target="_blank" class="resource-link">MS</a></li>
-          <li><a href="QPC9.pdf" target="_blank" class="resource-link">Chapter 9</a></li>
-          <li><a href="MS9.pdf" target="_blank" class="resource-link">MS</a></li>
-          <li><a href="QPC10.pdf" target="_blank" class="resource-link">Chapter 10</a></li>
-          <li><a href="MS10.pdf" target="_blank" class="resource-link">MS</a></li>
-          
-        </ul>
+        <h2 id="questions-heading">Questions &amp; Mark Schemes</h2>
+        <span class="count">10 chapters</span>
       </div>
-    </div>
+      <table class="q-table">
+        <thead><tr><th scope="col">Chapter</th><th scope="col">Question paper</th><th scope="col">Mark scheme</th></tr></thead>
+        <tbody>
+          <tr><td>Chapter 1</td><td><a class="pill paper" href="https://polamahmud.github.io/0417/QPC1.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Paper</a></td><td><a class="pill ms" href="https://polamahmud.github.io/0417/MS1.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Mark Scheme</a></td></tr>
+          <tr><td>Chapter 2</td><td><a class="pill paper" href="https://polamahmud.github.io/0417/QPC2.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Paper</a></td><td><a class="pill ms" href="https://polamahmud.github.io/0417/MS2.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Mark Scheme</a></td></tr>
+          <tr><td>Chapter 3</td><td><a class="pill paper" href="https://polamahmud.github.io/0417/QPC3.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Paper</a></td><td><a class="pill ms" href="https://polamahmud.github.io/0417/MS3.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Mark Scheme</a></td></tr>
+          <tr><td>Chapter 4</td><td><a class="pill paper" href="https://polamahmud.github.io/0417/QPC4.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Paper</a></td><td><a class="pill ms" href="https://polamahmud.github.io/0417/MS4.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Mark Scheme</a></td></tr>
+          <tr><td>Chapter 5</td><td><a class="pill paper" href="https://polamahmud.github.io/0417/QPC5.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Paper</a></td><td><a class="pill ms" href="https://polamahmud.github.io/0417/MS5.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Mark Scheme</a></td></tr>
+          <tr><td>Chapter 6</td><td><a class="pill paper" href="https://polamahmud.github.io/0417/QPC6.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Paper</a></td><td><a class="pill ms" href="https://polamahmud.github.io/0417/MS6.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Mark Scheme</a></td></tr>
+          <tr><td>Chapter 7</td><td><a class="pill paper" href="https://polamahmud.github.io/0417/QPC7.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Paper</a></td><td><a class="pill ms" href="https://polamahmud.github.io/0417/MS7.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Mark Scheme</a></td></tr>
+          <tr><td>Chapter 8</td><td><a class="pill paper" href="https://polamahmud.github.io/0417/QPC8.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Paper</a></td><td><a class="pill ms" href="https://polamahmud.github.io/0417/MS8.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Mark Scheme</a></td></tr>
+          <tr><td>Chapter 9</td><td><a class="pill paper" href="https://polamahmud.github.io/0417/QPC9.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Paper</a></td><td><a class="pill ms" href="https://polamahmud.github.io/0417/MS9.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Mark Scheme</a></td></tr>
+          <tr><td>Chapter 10</td><td><a class="pill paper" href="https://polamahmud.github.io/0417/QPC10.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Paper</a></td><td><a class="pill ms" href="https://polamahmud.github.io/0417/MS10.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Mark Scheme</a></td></tr>
+        </tbody>
+      </table>
+    </section>
 
-    <div class="social-footer">
-      <p class="slogan">Learn fast. Scroll smart.</p>
-      <a href="https://www.tiktok.com/@projectdoomscroll" target="_blank" class="tiktok-btn">
-        <span>Project Doomscroll</span>
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-          <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3V0Z"/>
-        </svg>
-      </a>
-    </div>
+  </main>
 
-  </div>
+  <footer>
+    <p>ICT 0417 Learning Hub &middot; <a href="https://www.tiktok.com/@projectdoomscroll" target="_blank" rel="noopener">Project Doomscroll</a></p>
+  </footer>
 
   <script>
-    const toggleBtn = document.getElementById('theme-toggle');
-    const htmlElement = document.documentElement;
-
-    // 1. Check if user previously selected a theme
-    const savedTheme = localStorage.getItem('theme');
-    
-    // 2. Check system preference
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    // Apply the saved theme, or the system preference if no save exists
-    if (savedTheme) {
-      htmlElement.setAttribute('data-theme', savedTheme);
-    } else if (systemPrefersDark) {
-      htmlElement.setAttribute('data-theme', 'dark');
+    function setMode(mode) {
+      document.documentElement.setAttribute('data-mode', mode);
+      localStorage.setItem('ict0417-mode', mode);
+      updateButtons(mode);
     }
-
-    // Toggle Logic
-    toggleBtn.addEventListener('click', () => {
-      const currentTheme = htmlElement.getAttribute('data-theme');
-      
-      if (currentTheme === 'dark') {
-        htmlElement.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-      } else {
-        htmlElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-      }
-    });
+    function updateButtons(mode) {
+      document.getElementById('btn-light').classList.toggle('active', mode === 'light');
+      document.getElementById('btn-auto').classList.toggle('active', mode === 'auto');
+      document.getElementById('btn-dark').classList.toggle('active', mode === 'dark');
+    }
+    updateButtons(document.documentElement.getAttribute('data-mode') || 'auto');
   </script>
 
 </body>
