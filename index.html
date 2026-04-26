@@ -191,7 +191,8 @@
     .section-header h2 { font-size:1.15rem; font-weight:600; letter-spacing:-.01em; }
     .section-header span.count { font-size:.8rem; color:var(--txt3); margin-left:auto; }
 
-    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:.65rem; }
+    /* ═══════ GRID — always 2 columns ═══════ */
+    .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:.65rem; }
     .grid a {
       display:flex; align-items:center; gap:.6rem; padding:.75rem 1rem;
       background:var(--bg-card); border:1px solid var(--brd); border-radius:var(--r);
@@ -210,12 +211,15 @@
     .pdf-icon.slide { background:var(--accent-lt); color:var(--accent); }
     .pdf-icon.book  { background:var(--sec-lt); color:var(--sec); }
 
+    /* ═══════ TABLE — matches grid width, 2 even columns ═══════ */
     .q-table {
-    width:auto; max-width:420px; border-collapse:separate; border-spacing:0;
+      width:100%; border-collapse:separate; border-spacing:0;
       background:var(--bg-card); border:1px solid var(--brd);
       border-radius:var(--rl); overflow:hidden; box-shadow:var(--sh-sm); transition:all .3s;
+      table-layout:fixed;
     }
     .q-table thead th {
+      width:50%;
       text-align:left; font-size:.78rem; font-weight:600; letter-spacing:.04em;
       text-transform:uppercase; color:var(--txt3); padding:.85rem 1rem;
       background:var(--bg-hov); border-bottom:1px solid var(--brd);
@@ -257,7 +261,7 @@
 
     @media (max-width:600px) {
       .hero { padding:3rem 1.25rem 2rem; }
-      .grid { grid-template-columns:1fr 1fr; gap:.5rem; }
+      .grid { gap:.5rem; }
       .grid a { padding:.65rem .75rem; font-size:.85rem; }
       .q-table { font-size:.85rem; }
       .q-table thead th,.q-table tbody td { padding:.6rem .65rem; }
@@ -336,33 +340,34 @@
       <table class="q-table">
         <thead><tr><th scope="col">Paper</th><th scope="col">Marking Scheme</th></tr></thead>
         <tbody>
-
-          <!--
-          <tr><td>Chapter 1</td><td><a class="pill paper" href="https://polamahmud.github.io/0417/QPC1.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Paper</a></td>
-            <td><a class="pill ms" href="https://polamahmud.github.io/0417/MS1.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Mark Scheme</a></td></tr>
-          -->
-          
-          <tr><td>M25-12</td><td><a class="pill paper" href="https://polamahmud.github.io/0417/M25-12.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Mark Scheme</a></td> </tr>
-          <!--  <td><a class="pill ms" href="https://polamahmud.github.io/0417/MS2.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Mark Scheme</a></td></tr>
-          -->
-          <tr><td>S25-11</td><td><a class="pill paper" href="https://polamahmud.github.io/0417/S25-11.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Mark Scheme</a></td> </tr>
-          <!--  <td><a class="pill ms" href="https://polamahmud.github.io/0417/MS3.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Mark Scheme</a></td></tr>
-          -->
-          <tr><td>S25-12</td><td><a class="pill paper" href="https://polamahmud.github.io/0417/S25-12.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Mark Scheme</a></td> </tr>
-          <!--  <td><a class="pill ms" href="https://polamahmud.github.io/0417/MS4.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Mark Scheme</a></td></tr>
-          -->
-          <tr><td>S25-13</td><td><a class="pill paper" href="https://polamahmud.github.io/0417/S25-13.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Mark Scheme</a></td> </tr>
-          <!--  <td><a class="pill ms" href="https://polamahmud.github.io/0417/MS5.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Mark Scheme</a></td></tr>
-          -->
-          <tr><td>W25-11</td><td><a class="pill paper" href="https://polamahmud.github.io/0417/W25-11.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Mark Scheme</a></td> </tr>
-          <!--  <td><a class="pill ms" href="https://polamahmud.github.io/0417/MS6.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Mark Scheme</a></td></tr>
-          -->
-          <tr><td>W25-12</td><td><a class="pill paper" href="https://polamahmud.github.io/0417/W25-12.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Mark Scheme</a></td> </tr>
-          <!--  <td><a class="pill ms" href="https://polamahmud.github.io/0417/MS7.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Mark Scheme</a></td></tr>
-          -->
-          <tr><td>W25-13</td><td><a class="pill paper" href="https://polamahmud.github.io/0417/W25-13.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Mark Scheme</a></td> </tr>
-          <!--  <td><a class="pill ms" href="https://polamahmud.github.io/0417/MS8.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Mark Scheme</a></td></tr>
-          -->
+          <tr>
+            <td>M25-12</td>
+            <td><a class="pill paper" href="https://polamahmud.github.io/0417/M25-12.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Mark Scheme</a></td>
+          </tr>
+          <tr>
+            <td>S25-11</td>
+            <td><a class="pill paper" href="https://polamahmud.github.io/0417/S25-11.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Mark Scheme</a></td>
+          </tr>
+          <tr>
+            <td>S25-12</td>
+            <td><a class="pill paper" href="https://polamahmud.github.io/0417/S25-12.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Mark Scheme</a></td>
+          </tr>
+          <tr>
+            <td>S25-13</td>
+            <td><a class="pill paper" href="https://polamahmud.github.io/0417/S25-13.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Mark Scheme</a></td>
+          </tr>
+          <tr>
+            <td>W25-11</td>
+            <td><a class="pill paper" href="https://polamahmud.github.io/0417/W25-11.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Mark Scheme</a></td>
+          </tr>
+          <tr>
+            <td>W25-12</td>
+            <td><a class="pill paper" href="https://polamahmud.github.io/0417/W25-12.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Mark Scheme</a></td>
+          </tr>
+          <tr>
+            <td>W25-13</td>
+            <td><a class="pill paper" href="https://polamahmud.github.io/0417/W25-13.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Mark Scheme</a></td>
+          </tr>
         </tbody>
       </table>
     </section>
